@@ -2,4 +2,4 @@
  + Discord : https://discord.gg/FGeu25d34t
  + ระบบ Squad หรือ Blip ของหน่วยงานสำหรับ FiveM
 # About
- + แจกฟรีห้ามนำไปขายต่อ
+ + แจกฟรีห้ามนำไปขายต่อครับ
