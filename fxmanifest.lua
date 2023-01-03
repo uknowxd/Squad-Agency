@@ -4,5 +4,5 @@ games { 'gta5' }
 author 'uknowxd#5513'
 description 'Squad-Agency By: Qwerty-Hub'
 
-server_scripts { 'core/sv.lua' , 'config.lua' }
-client_scripts { 'core/cl.lua' , 'config.lua' }
+server_scripts { 'config.lua' , 'core/sv.lua' }
+client_scripts { 'config.lua' , 'core/cl.lua' }
