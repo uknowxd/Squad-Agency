@@ -13,15 +13,15 @@ AddEventHandler(Config["Base_Events"]["setJob"], function(source, job, lastJob)
 				job = xPlayer.job.name
 			}
 			Squad_State[playerId] = _data
-			TriggerClientEvent("Qwerty_Hub:Squad:Toggle", playerId, true)
+			TriggerClientEvent("Qwerty_Xenon:Squad:Toggle", playerId, true)
 		end
 	end
 	Squad_State[source] = nil
-	TriggerClientEvent("Qwerty_Hub:Squad:Toggle", _source, false)
+	TriggerClientEvent("Qwerty_Xenon:Squad:Toggle", _source, false)
 end)
 
-RegisterServerEvent("Qwerty_Hub:Squad:Check")
-AddEventHandler("Qwerty_Hub:Squad:Check", function()
+RegisterServerEvent("Qwerty_Xenon:Squad:Check")
+AddEventHandler("Qwerty_Xenon:Squad:Check", function()
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	for k,v in pairs(Config['Squad']) do
@@ -34,27 +34,27 @@ AddEventHandler("Qwerty_Hub:Squad:Check", function()
 				}
 				Squad_State[_source] = _data
 				print(ESX.DumpTable(Squad_State))
-				TriggerClientEvent("Qwerty_Hub:Squad:Toggle", _source, true)
+				TriggerClientEvent("Qwerty_Xenon:Squad:Toggle", _source, true)
 			end
 		end
 	end
 end)
 
-RegisterServerEvent("Qwerty_Hub:Squad:Die")
-AddEventHandler("Qwerty_Hub:Squad:Die", function()
+RegisterServerEvent("Qwerty_Xenon:Squad:Die")
+AddEventHandler("Qwerty_Xenon:Squad:Die", function()
 	local _source = source
 	Squad_State[_source] = nil
-	TriggerClientEvent("Qwerty_Hub:Toggle", _source, false)
+	TriggerClientEvent("Qwerty_Xenon:Toggle", _source, false)
 end)
 
-RegisterServerEvent("Qwerty_Hub:Squad:SV-Update")
-AddEventHandler("Qwerty_Hub:Squad:SV-Update", function()
+RegisterServerEvent("Qwerty_Xenon:Squad:SV-Update")
+AddEventHandler("Qwerty_Xenon:Squad:SV-Update", function()
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	for id, info in pairs(Squad_State) do
 		if info.job == xPlayer.job.name then
 			Squad_State[id].coords = GetEntityCoords(GetPlayerPed(id))
-			TriggerClientEvent("Qwerty_Hub:Squad:CL-Update", id, Squad_State)
+			TriggerClientEvent("Qwerty_Xenon:Squad:CL-Update", id, Squad_State)
 		end
 	end
 end)
@@ -67,7 +67,7 @@ Citizen.CreateThread(function()
 				for k,v in pairs(Config['Squad']) do
 					if k == info.job then
 						Squad_State[id].coords = GetEntityCoords(GetPlayerPed(id))
-						TriggerClientEvent("Qwerty_Hub:Squad:CL-Update", id, Squad_State)
+						TriggerClientEvent("Qwerty_Xenon:Squad:CL-Update", id, Squad_State)
 					end
 				end
 			end

@@ -11,7 +11,7 @@ AddEventHandler(Config["Base_Events"]["playerLoaded"], function()
 	Citizen.SetTimeout(1500, function() 
 		PlayerData = ESX.GetPlayerData()
 		if not firstSpawn then
-			TriggerServerEvent('Qwerty_Hub:Squad:Check')
+			TriggerServerEvent('Qwerty_Xenon:Squad:Check')
 			firstSpawn = true
 		end
 	end)
@@ -21,7 +21,7 @@ AddEventHandler(Config["Base_Events"]["playerSpawned"], function(data)
 	if isDead then
 		for k,v in pairs(Config['Squad']) do
 			if PlayerData.job.name == k and not v.PlayerDeathShow then
-				TriggerServerEvent('Qwerty_Hub:Squad:Check')
+				TriggerServerEvent('Qwerty_Xenon:Squad:Check')
 				isDead = false
 			end
 		end
@@ -32,7 +32,7 @@ AddEventHandler(Config["Base_Events"]["onPlayerDeath"], function(spawn)
 	if not isDead then
 		for k,v in pairs(Config['Squad']) do
 			if PlayerData.job.name == k and not v.PlayerDeathShow then
-				TriggerServerEvent('Qwerty_Hub:Squad:Die')
+				TriggerServerEvent('Qwerty_Xenon:Squad:Die')
 				RemoveAnyExistingSquadBlips()
 				isDead = true
 			end
@@ -40,8 +40,8 @@ AddEventHandler(Config["Base_Events"]["onPlayerDeath"], function(spawn)
 	end
 end)
 
-RegisterNetEvent("Qwerty_Hub:Squad:Toggle")
-AddEventHandler("Qwerty_Hub:Squad:Toggle", function(data)
+RegisterNetEvent("Qwerty_Xenon:Squad:Toggle")
+AddEventHandler("Qwerty_Xenon:Squad:Toggle", function(data)
 	Active = data
 	PlayerData = ESX.GetPlayerData()
 	if not Active then
@@ -49,8 +49,8 @@ AddEventHandler("Qwerty_Hub:Squad:Toggle", function(data)
 	end
 end)
 
-RegisterNetEvent("Qwerty_Hub:Squad:CL-Update")
-AddEventHandler("Qwerty_Hub:Squad:CL-Update", function(_data)
+RegisterNetEvent("Qwerty_Xenon:Squad:CL-Update")
+AddEventHandler("Qwerty_Xenon:Squad:CL-Update", function(_data)
 	if Active then
 		RemoveAnyExistingSquadBlips()
 		RefreshBlips(_data)
@@ -66,7 +66,7 @@ Citizen.CreateThread(function()
 			local playerCoords = GetEntityCoords(PlayerPedId())
 			local distance = #(playerCoords - previousCoords)
 			if distance > Config['ClientDistance'] then
-				TriggerServerEvent('Qwerty_Hub:Squad:SV-Update')
+				TriggerServerEvent('Qwerty_Xenon:Squad:SV-Update')
 				previousCoords = playerCoords
 			end
 		end
